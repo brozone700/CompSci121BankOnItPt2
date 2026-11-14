@@ -1,4 +1,4 @@
-# CompSci121BankOnItPt1
+# CompSci121BankOnItPt2
 
 ```mermaid
 classDiagram
@@ -6,6 +6,10 @@ classDiagram
         <<interface>>
         +menu() String
         +start() void
+    }
+
+    class Serializable {
+        <<interface>>
     }
 
     class CheckingAccount {
@@ -45,19 +49,49 @@ classDiagram
         +getReport()* String
     }
 
+    class Admin {
+        +Admin()
+        +menu() String
+        +getReport() String
+    }
+
     class Customer {
         -CheckingAccount checking
         -SavingsAccount savings
-        +main() void
         +Customer()
+        +Customer(String userName, String PIN)
+        +main() void
         +start() void
         +menu() String
         +changePIN() void
         +getReport() String
     }
 
+    class Bank {
+        -Admin admin
+        -ArrayList~Customer~ customers
+        +Bank()
+        +main() void
+        +loadSampleCustomers() void
+        +loadCustomers() void
+        +saveCustomers() void
+        +fullCustomerReport() void
+        +addUser() void
+        +applyInterest() void
+        +loginAsCustomer() void
+        +menu() String
+        +start() void
+        +startAdmin() void
+    }
+
     HasMenu <|.. CheckingAccount : implements
     HasMenu <|.. User : implements
+    HasMenu <|.. Bank : implements
+    Serializable <|.. CheckingAccount : implements
+    Serializable <|.. User : implements
     CheckingAccount <|-- SavingsAccount : extends
+    User <|-- Admin : extends
     User <|-- Customer : extends
+    Bank "1" o-- "1" Admin : has
+    Bank "1" o-- "n" Customer : has
 ```
