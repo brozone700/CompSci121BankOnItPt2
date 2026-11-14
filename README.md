@@ -2,26 +2,21 @@
 
 ```mermaid
 classDiagram
-    class HasMenu {
-        <<interface>>
+    class HasMenu["HasMenu (interface)"] {
         +menu() String
         +start() void
     }
 
-    class Serializable {
-        <<interface>>
-    }
-
-    class CheckingAccount {
+    class CheckingAccount["CheckingAccount (ser)"] {
         -double balance
         +CheckingAccount()
-        +CheckingAccount(double balance)
+        +CheckingAccount(balance)
         +main() void
         +menu() String
-        +start() void
+        +start() String
         +getBalance() double
         +getBalanceString() String
-        +setBalance(double balance) void
+        +setBalance(balance) void
         +checkBalance() void
         -getDouble() double
         +makeDeposit() void
@@ -30,23 +25,22 @@ classDiagram
 
     class SavingsAccount {
         -double interestRate
-        +main() void
+        +main(*)
         +calcInterest() void
-        +setInterestRate(double rate) void
-        +getInterestRate() double
+        +setInterestRate() void
+        +getInterestRate() void
     }
 
-    class User {
-        <<abstract>>
+    class User["User (abstract)"] {
         -String userName
         -String PIN
         +login() boolean
-        +login(String userName, String PIN) boolean
-        +setUserName(String userName) void
+        +login(userName, PIN) boolean
+        +setUserName(userName) void
         +getUserName() String
-        +setPIN(String PIN) void
+        +setPIN(PIN) void
         +getPIN() String
-        +getReport()* String
+        +getReport() String
     }
 
     class Admin {
@@ -55,12 +49,11 @@ classDiagram
         +getReport() String
     }
 
-    class Customer {
+    class Customer["Customer (ser)"] {
         -CheckingAccount checking
         -SavingsAccount savings
-        +Customer()
-        +Customer(String userName, String PIN)
         +main() void
+        +Customer()
         +start() void
         +menu() String
         +changePIN() void
@@ -69,7 +62,7 @@ classDiagram
 
     class Bank {
         -Admin admin
-        -ArrayList~Customer~ customers
+        -ArrayList customers
         +Bank()
         +main() void
         +loadSampleCustomers() void
@@ -79,19 +72,16 @@ classDiagram
         +addUser() void
         +applyInterest() void
         +loginAsCustomer() void
-        +menu() String
+        +menu() void
         +start() void
         +startAdmin() void
     }
 
-    HasMenu <|.. CheckingAccount : implements
-    HasMenu <|.. User : implements
-    HasMenu <|.. Bank : implements
-    Serializable <|.. CheckingAccount : implements
-    Serializable <|.. User : implements
-    CheckingAccount <|-- SavingsAccount : extends
-    User <|-- Admin : extends
-    User <|-- Customer : extends
-    Bank "1" o-- "1" Admin : has
-    Bank "1" o-- "n" Customer : has
+    HasMenu <|.. CheckingAccount : Implements
+    HasMenu <|.. User : Implements
+    CheckingAccount <|-- SavingsAccount : Extends
+    User <|-- Admin : Extends
+    User <|-- Customer : Extends
+    Bank "1" o-- "1" Admin
+    Bank "n" o-- "n" Customer
 ```
