@@ -84,5 +84,6 @@ public class CheckingAccount implements HasMenu, Serializable {
 	    } else {
 	        setBalance(getBalance() - amount);
 	        System.out.println("New balance: " + getBalanceString());
-    }
+    	}
+	}
 }
