@@ -1,6 +1,6 @@
 public class SavingsAccount extends CheckingAccount {
  
-    private double interestRate = 0.02;
+    private double interestRate = 0.05;
  
     public static void main(String[] args) {
         SavingsAccount account = new SavingsAccount();
