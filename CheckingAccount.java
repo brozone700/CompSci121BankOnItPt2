@@ -77,7 +77,12 @@ public class CheckingAccount implements HasMenu, Serializable {
         System.out.println("Making a withdrawal...");
         System.out.print("How much to withdraw? ");
         double amount = getDouble();
-        setBalance(getBalance() - amount);
-        System.out.println("New balance: " + getBalanceString());
+	    if (amount <= 0) {
+	        System.out.println("Withdrawal must be more than $0.");
+	    } else if (amount > getBalance()) {
+	        System.out.println("Insufficient funds. Your balance is " + getBalanceString() + ".");
+	    } else {
+	        setBalance(getBalance() - amount);
+	        System.out.println("New balance: " + getBalanceString());
     }
 }
