@@ -10,9 +10,10 @@ public class Bank implements HasMenu {
     public Bank() {
         admin = new Admin();
         customers = new CustomerList();
-		
-        this.loadSampleCustomers();
-        this.saveCustomers();
+	
+	//clears data and adds sample customers
+        //this.loadSampleCustomers();
+        //this.saveCustomers();
 
         this.loadCustomers();
         this.start();
